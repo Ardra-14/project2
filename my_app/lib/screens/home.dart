@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget{
   @override
@@ -32,7 +33,10 @@ class HomeScreen extends StatelessWidget{
       ),
     );
   }
-  void signOut(BuildContext ctxt){
+  void signOut(BuildContext ctxt) async{
+    final _sharedprefs = await SharedPreferences.getInstance();
+    _sharedprefs.clear();
+
     Navigator.of(ctxt).pushAndRemoveUntil(MaterialPageRoute(builder: (cntx)=>LoginScreen()), (route)=>false);
   }
 }
